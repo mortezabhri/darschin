@@ -45,7 +45,8 @@ export default function Settings() {
        const [openCreatePlan, setOpenCreatePlan] = useState(false);
        const [textarea, setTextarea] = useState(null);
        const [vocationWeek, setVocationWeek] = useState(Get("vocation") ?? false)
-       const filePicker = useRef()
+       const filePicker = useRef();
+       const redirect = useNavigate();
 
        const checkInputFile = useCallback(async (e) => {
               try {
@@ -58,7 +59,7 @@ export default function Settings() {
                      Add("plans", data.plans);
                      notifySuccess("موفقیت آمیز. درحال برگشت به صفحه برنامه ها ...");
                      setTimeout(() => {
-                            window.location.href = "/plans"
+                            window.location.href = "/darschin/plans"
                      }, 1000)
               } catch (e) {
                      switch (e.code) {
@@ -79,7 +80,7 @@ export default function Settings() {
 
        const { dispatch_Plan_Context } = usePlans();
        const { settings, dispatch } = useSettings();
-       const redirect = useNavigate();
+
 
        const pdfDownloadHandler = () => {
               const toastLoadID = notifyWarn("عملیات درحال انجام.لطفا صبر کنید");
@@ -161,7 +162,7 @@ export default function Settings() {
               <div className="w-full mt-40">
                      {/* svg box */}
                      <div className="absolute top-1 right-0 w-full h-52 flex justify-center items-center">
-                            <img src="./images/title_shape/title_shape_orange.png" className="w-full h-full" alt="" />
+                            <img src="/darschin/images/title_shape/title_shape_orange.png" className="w-full h-full" alt="" />
                             <p className="absolute text-2xl font-morabba-bold">تنظیمات</p>
                      </div>
                      {/* content */}
@@ -185,12 +186,12 @@ export default function Settings() {
                                                         <div className="w-full h-28 border border-black mt-4 overflow-hidden rounded-lg relative">
                                                                <svg
                                                                       onClick={() => {
-                                                                             window.open(`${window.location.origin}/images/LearnSelected.gif`, "_blank");
+                                                                             window.open(`${window.location.origin}/darschin/images/LearnSelected.gif`, "_blank");
                                                                       }}
                                                                       xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0 rounded-lg size-10 backdrop-blur-xs p-1 cursor-pointer" viewBox="0 0 24 24" fill="none">
                                                                       <path d="M4 15V18C4 19.1046 4.89543 20 6 20H9M15.2173 20H18C19.1046 20 20 19.1046 20 18V15M20 9V6C20 4.89543 19.1046 4 18 4H15M4 9V6C4 4.89543 4.89543 4 6 4H9" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                                </svg>
-                                                               <img className="w-full h-full" src="/images/LearnSelected.gif" alt="" />
+                                                               <img className="w-full h-full" src="/darschin/images/LearnSelected.gif" alt="" />
                                                         </div>
                                                         <div className="w-full flex mt-6 gap-x-2" dir="rtl">
                                                                <textarea

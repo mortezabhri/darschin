@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
-export default defineConfig( {
+export default defineConfig({
+       base: "/darschin",
        plugins: [
               react(),
               tailwindcss(),
@@ -33,12 +34,12 @@ export default defineConfig( {
                             description: " تنظیم برنامه تحصیلی به روش دلخواه",
                             icons: [
                                    {
-                                          src: "/favicon/android-chrome-192x192.png",
+                                          src: "/darschin/favicon/android-chrome-192x192.png",
                                           sizes: "192x192",
                                           type: "image/png"
                                    },
                                    {
-                                          src: "/favicon/android-chrome-512x512.png",
+                                          src: "/darschin/favicon/android-chrome-512x512.png",
                                           sizes: "512x512",
                                           type: "image/png"
                                    }

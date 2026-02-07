@@ -9,7 +9,9 @@ registerSW({
 })
 
 createRoot(document.getElementById('root')).render(
-       <BrowserRouter>
+       <BrowserRouter
+              basename='/darschin'
+       >
               <App />
        </BrowserRouter>
 )

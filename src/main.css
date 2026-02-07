@@ -3,32 +3,32 @@
 
 @font-face {
      font-family: gothic-bold;
-     src: url("/fonts/GOTHICB.TTF");
+     src: url("/darschin/fonts/GOTHICB.TTF");
 }
 
 @font-face {
      font-family: gothic;
-     src: url("/fonts/GOTHIC.TTF");
+     src: url("/darschin/fonts/GOTHIC.TTF");
 }
 
 @font-face {
      font-family: morabba-bold;
-     src: url("/fonts/Morabba-Black.ttf");
+     src: url("/darschin/fonts/Morabba-Black.ttf");
 }
 
 @font-face {
      font-family: morabba;
-     src: url("/fonts/Morabba-Regular.ttf");
+     src: url("/darschin/fonts/Morabba-Regular.ttf");
 }
 
 @font-face {
      font-family: iranisans; 
-     src: url("/fonts/IRANSansXV.woff");
+     src: url("/darschin/fonts/IRANSansXV.woff");
 }
 
 @font-face {
      font-family: ghaf;
-     src: url("/fonts/Digi-Ghaf-Bold.ttf");
+     src: url("/darschin/fonts/Digi-Ghaf-Bold.ttf");
 } 
 
 

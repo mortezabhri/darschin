@@ -4,22 +4,29 @@ import { AccordionItem } from "./../components/AccordionItem"
 
 export default function FAQ() {
 
+       // FAQs
        const arrayOfFaq = [
               {
-                     ask: "چطور درسی رو به برنامم اضافه کنم؟",
+                     ask: "دانشجوی دانشگاه ملی مهارت هستم. چطور برنامه رو تنظیم کنم؟",
+                     answer: "وارد بخش تنظیمات بشید و روی گزینه مخصوص دانشجویان ملی مهارت بزنید تا آموزش تصویری ببینید",
+                     important: true
+              },
+              {
+                     ask: "آیا بصورت افلاین میشه از درس چین استفاده کرد؟",
+                     answer: "بله شما میتونید بعد از اولین ورود به سایت و افزودن اطلاعات درسی تون ، بدون نیاز به اینترنت هم از برنامه استفاده کنید. همچنین میتونید درس چین رو نصب کنید تا بصورت اپ اندرویدی از درس چین بهره ببرید.",
+                     important: true
+              },
+              {
+                     ask: "چطور درسی رو جداگانه به برنامم اضافه کنم؟",
                      answer: "کافیه از منوی کناری گزینه درس جدید رو انتخاب کنید و نام درس ، توضیحات ، روز هفته و ساعت شروع و پایان کلاس رو انتخاب کرده و تایید کنید.توجه داشته باشید که اگر تایمی رو ثبت کنید که با تایم قبلی تون تداخل داشته باشه درس جدید حذف میشه و اطلاعاتش در دسترس نیست"
               },
               {
-                     ask: "میتونم لیست تمام درس هارو در قالب PDF داشته باشم؟",
-                     answer: "این آپشن در ورژن جدید فعال شده و کافیه به صفحه تنظیمات رفته و روی دریافت فایل پی دی اف کلیک کنید"
+                     ask: "میتونم لیست تمام درس هارو در قالب PDF یا عکس با کیفیت داشته باشم؟",
+                     answer: "این آپشن در ورژن جدید فعال شده و کافیه به صفحه تنظیمات رفته و روی دانلود فایل کلیک کنید و فرمت مورد نظرتون رو انتخاب کنید تا لیست درساتون رو با کیفیت بالا دانلود کنید"
               },
               {
                      ask: "به یک باگ/اروری خوردم. چطور به ادمین خبر بدم؟",
                      answer: "میتونید به آیدی @mbhdev در تلگرام پیام بدید "
-              },
-              {
-                     ask: "چرا زمانی که میخوام تایم انتخاب کنم صفحه اسکرول میشه؟",
-                     answer: "این مشکل به این دلیل پیش میاد که مرورگر متوجه نمیشه که اسکرول شما روی باکس انتخاب هست ، برای رفع این مشکل کافیه یکبار روی اعداد کلیک کنید تا مرورگر روی باکس فوکوس کنه."
               },
               {
                      ask: "چطور میتونم تمام درس هایی که به برنامم اضافه شده رو ببینم؟",
@@ -43,14 +50,14 @@ export default function FAQ() {
               <>
                      <section className='w-full px-4 '>
                             <div className="absolute top-1 right-0 w-full h-52 flex justify-center items-center">
-                                   <img src="./images/title_shape/title_shape_blue.png" className="w-full h-full" alt="" />
+                                   <img src="/darschin/images/title_shape/title_shape_blue.png" className="w-full h-full" alt="" />
                                    <p className="absolute text-2xl font-morabba-bold">سوالات متداول</p>
                             </div>
                             <div className='mt-40 mb-16' dir='rtl'>
                                    <Accordion>
                                           {
                                                  arrayOfFaq.map(item => (
-                                                        <AccordionItem key={Math.random() * 1000} eventKey={Math.random() * 1000} className={"bg-neutral-300 rounded-xl font-morabba"} classNameBody={"font-morabba border border-neutral-300 rounded-b-xl -mt-2"}>
+                                                        <AccordionItem key={Math.random() * 1000} eventKey={Math.random() * 1000} className={`${item.important && "border-3 border-blue-500 relative z-2"} bg-neutral-300 rounded-xl font-morabba`} classNameBody={"font-morabba border border-neutral-300 rounded-b-xl -mt-2"}>
                                                                {/* btn */}
                                                                <h1 className=' cursor-pointer py-4 bg-neutral-300 px-4 border-neutral-400 rounded-xl font-semibold' >
                                                                       {item.ask}
@@ -67,7 +74,7 @@ export default function FAQ() {
                      </section>
                      <div className="absolute -bottom-0 w-full px-4" dir='rtl'>
                             <p className='text-sm font-iranisans text-left dark:text-white' >
-                                   <a href="https://github.com/mortezabhri/darschin-react" className='text-black dark:text-white underline inline-block mx-2'>(لینک گیتهاب پروژه)</a>
+                                   <a href="https://github.com/mortezabhri/darschin" className='text-black dark:text-white underline inline-block mx-2'>(لینک گیتهاب پروژه)</a>
                             </p>
                      </div>
               </>
