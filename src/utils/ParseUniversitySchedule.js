@@ -78,6 +78,7 @@ function checkDay(str) {
      switch (str) {
           case "شنبه": return 0;
           case "یک‌شنبه": return 1;
+          case "يك‌شنبه": return 1;
           case "دوشنبه": return 2;
           case "سه‌شنبه": return 3;
           case "چهارشنبه": return 4;
