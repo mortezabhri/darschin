@@ -45,6 +45,14 @@ export default function Settings() {
        const [openCreatePlan, setOpenCreatePlan] = useState(false);
        const [textarea, setTextarea] = useState(null);
        const [vocationWeek, setVocationWeek] = useState(Get("vocation") ?? false)
+       const [learn, setLearn] = useState({
+              index: 0,
+              text: ""
+       });
+       useEffect(() => {
+              if (learn.index > 8) setLearn({ index: 0, text: "" })
+       }, [learn.index])
+
        const filePicker = useRef();
        const redirect = useNavigate();
 
@@ -81,7 +89,19 @@ export default function Settings() {
        const { dispatch_Plan_Context } = usePlans();
        const { settings, dispatch } = useSettings();
 
-
+       const refreshDesc = (index) => {
+              switch (index) {
+                     case 1: return "دانشجویان دانشگاه ملی مهارت میتوانند صرفا با کپی و پیست برنامه خود از سایت بوستان در این بخش ، برنامه خود را بصورت خودکار بسازند"
+                     case 2: return "امکان شخصی‌سازی تایم روز مطابق انتخاب واحد شما (بصورت پیشفرض ساعت شروع کلاس ها از 8 تا 20 تنظیم شده است )"
+                     case 3: return "پشتیبانی از حالت روشن و تاریک، سازگار با شرایط نوری مختلف"
+                     case 4: return "دریافت برنامه درسی در قالب های مختلف (عکس یا پی دی اف) همچنین میتونید با یکبار انلاین شدن بصورت افلاین از درس چین استفاده کنید (جهت دسترسی بهتر میتونید در قالب اپلیکیشن روی موبایل هم نصب کنید)"
+                     case 5: return "میتونید از درس هایی که اضافه کردید خروجی بگیرید تا روی یک دستگاه دیگه هم درس ها تون رو داشته باشید"
+                     case 6: return "با وارد کردن خروجی ای که از درس چین گرفتید به راحتی درس هاتون رو اضافه کنید"
+                     case 7: return "کاربرانی که در روز های پنج شنبه و جمعه کلاسی ندارند میتونند این روز ها رو از برنامه شون حذف کنند "
+                     case 8: return ""
+                     default: return ""
+              }
+       }
        const pdfDownloadHandler = () => {
               const toastLoadID = notifyWarn("عملیات درحال انجام.لطفا صبر کنید");
               Add("download_pdf_handler", toastLoadID);
@@ -160,6 +180,41 @@ export default function Settings() {
 
        return (
               <div className="w-full mt-40">
+                     {console.log(learn)}
+                     {/* bg blur {for leran} */}
+                     <div style={{ display: learn.index ? "block" : "none" }} className="absolute top-0 left-0 w-full h-full backdrop-blur-sm z-99">
+                            {/* description */}
+                            <div
+                                   className={`${learn.index === 8 && "top-1/2 -translate-y-1/2"} relative text-sm text-center pt-6 pb-8 px-4 bg-neutral-100 rounded-xl m-8 font-iranisans z-999`} dir="rtl"
+                            >
+                                   {
+                                          learn.index === 8 && (
+                                                 <>
+                                                        <h3 className="text-xl mb-6">نکات تکمیلی مهم</h3>
+                                                        <p>
+                                                               <span className="text-red-400">کلاس های دو پارتی (به عنوان مثال یکشنبه 10-14 ، 15-17 ) در حالت خودکار در بخش مختص دانشجویان ملی مهارت تنها پارت اول کلاس افزوده میشود و پارت دوم را باید دستی وارد کنید. </span>
+                                                               برای افزودن دستی درس جدید از منو گزینه "افزودن درس جدید" رو انتخاب کنید.
+                                                        </p>
+                                                        <p className="mt-1">در حین استفاده از برنامه اگر به مشکلی برخوردید حتما به ایدی پشتیبانی در تلگرام (@mbhdev) اطلاع رسانی کنید</p>
+                                                 </>
+                                          )
+                                   }
+                                   {learn.text}
+                                   {/* next btn */}
+                                   <button onClick={() => setLearn(prev => ({ text: refreshDesc(prev.index + 1), index: prev.index + 1 }))} className="absolute bottom-1 left-2 text-cyan-500 cursor-pointer" >بعدی <span className="rotate-180 inline-block">&#10170;</span></button>
+                            </div>
+
+                     </div>
+                     {/* question mask {for learn} */}
+                     <div
+                            onClick={() => setLearn({ text: refreshDesc(1), index: 1 })}
+                            className="size-12 cursor-pointer animate-bounce rounded-full bg-[#ff9933] shadow-[0px_0px_12px_2px_#ff9933] absolute bottom-2 right-2"
+                     >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 400 400" fill="none" class="mdl-js">
+                                   <path d="M142 125.853C155.049 97.8883 180.62 82.7645 200.381 78.4757C227.189 72.6575 249.859 84.0511 257.624 112.528C260.302 122.352 259.217 138.128 253.081 148.517C247.426 158.092 239.904 165.942 227.555 176.481C225.251 178.447 217.389 185.018 216.649 185.643C199.849 199.818 191.567 209.152 186.81 220.972C182.053 232.792 182.305 269.489 216.649 266.35" stroke="#000000" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+                                   <path d="M198.744 315.68C198.744 317.274 198.744 319.614 198.744 322.7" stroke="#000000" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                     </div>
                      {/* svg box */}
                      <div className="absolute top-1 right-0 w-full h-52 flex justify-center items-center">
                             <img src="/darschin/images/title_shape/title_shape_orange.png" className="w-full h-full" alt="" />
@@ -168,7 +223,12 @@ export default function Settings() {
                      {/* content */}
                      <div className="w-full font-iranisans font-[500] space-y-8 ">
                             {/* create plan automatically */}
-                            <div className="flex flex-col justify-center items-center">
+                            <div
+                                   style={learn.index === 1 ? {
+                                          position: "relative",
+                                          zIndex: 102
+                                   } : {}}
+                                   className="flex flex-col justify-center items-center">
                                    <button
                                           dir="rtl"
                                           className="w-8/10 cursor-pointer bg-[#ff9933] shadow-yellow-500/50 shadow-xl p-2 rounded-lg"
@@ -211,7 +271,13 @@ export default function Settings() {
                                    </Modal>
                             </div>
                             {/* change settings */}
-                            <div className="flex flex-col justify-center items-center">
+                            <div
+                                   style={learn.index === 2 ? {
+                                          position: "relative",
+                                          zIndex: 102
+                                   } : {}}
+                                   className="flex flex-col justify-center items-center"
+                            >
                                    <button className="w-8/10 text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg" onClick={() => setOpenSetting(prev => !prev)}>تنظیم تایم روز</button>
                                    <Modal isOpen={openSetting} onClose={() => setOpenSetting(prev => !prev)}>
                                           <div className="w-full rounded-xl bg-white dark:bg-neutral-600 mx-auto">
@@ -231,7 +297,13 @@ export default function Settings() {
                                    </Modal>
                             </div>
                             {/* change them mode */}
-                            <div className="flex flex-col justify-center items-center">
+                            <div
+                                   style={learn.index === 3 ? {
+                                          position: "relative",
+                                          zIndex: 102
+                                   } : {}}
+                                   className="flex flex-col justify-center items-center"
+                            >
 
                                    {/* change mode */}
                                    <button
@@ -270,7 +342,13 @@ export default function Settings() {
                                    </button>
                             </div>
                             {/* download pdf */}
-                            <div className="flex flex-col justify-center items-center">
+                            <div
+                                   style={learn.index === 4 ? {
+                                          position: "relative",
+                                          zIndex: 102
+                                   } : {}}
+                                   className="flex flex-col justify-center items-center"
+                            >
                                    <button
                                           dir="rtl"
                                           className="w-8/10 text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/30 shadow-xl py-2 rounded-lg "
@@ -310,13 +388,27 @@ export default function Settings() {
                             </div>
                             {/* export / import */}
                             <div className="flex justify-center items-center px-13 gap-x-4">
-                                   <button onClick={() => ExportPlansHandler()} className=" w-full text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg">خروجی گرفتن</button>
-                                   <button onClick={() => importPlansHandler()} className=" w-full text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg">وارد کردن</button>
+                                   <button
+                                          style={learn.index === 5 ? {
+                                                 position: "relative",
+                                                 zIndex: 102
+                                          } : {}} onClick={() => ExportPlansHandler()} className=" w-full text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg">خروجی گرفتن</button>
+                                   <button
+                                          style={learn.index === 6 ? {
+                                                 position: "relative",
+                                                 zIndex: 102
+                                          } : {}} onClick={() => importPlansHandler()} className=" w-full text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg">وارد کردن</button>
                                    <input type="file" className="hidden" ref={filePicker} accept=".json" />
                             </div>
                             {/* enable/disable vocations */}
-                            <div className="flex flex-col justify-center items-center">
-                                   {/* download pdf */}
+                            <div
+                                   style={learn.index === 7 ? {
+                                          position: "relative",
+                                          zIndex: 102
+                                   } : {}}
+                                   className="flex flex-col justify-center items-center"
+                            >
+                                   {/* set vocation*/}
                                    <button
                                           dir="rtl"
                                           className={`${Get("vocation") ? "border-green-500 text-green-700 shadow-green-500/50" : "border-red-500 text-red-600 shadow-red-500/50"} mb-8 border w-8/10 text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 shadow-xl py-2 rounded-lg`}
