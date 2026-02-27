@@ -543,7 +543,7 @@ export default function ({ day }) {
                             </div>
                      </Modal>
                      {/* CONTENT */}
-                     <div className="w-full overflow-hidden relative">
+                     <div className="w-full relative">
                             {/* today */}
                             <h1 className="w-full border border-b-0 border-neutral-300 rounded-t-2xl py-3 text-center text-2xl font-morabba-bold bg-neutral-300 dark:bg-secondary dark:border-neutral-400 dark:text-white">
                                    {daysOfWeek[Number(day)]}
@@ -569,12 +569,19 @@ export default function ({ day }) {
 
                             {/* plans */}
                             <div className="w-full flex" dir="rtl">
+
                                    {/* times */}
                                    <div className="w-1/6 border border-t-0 border-neutral-300 dark:border-neutral-400">
+                                          {/* <div className="py-2 w-full"></div> */}
                                           {
-                                                 settings.counter.map(item => (
-                                                        <div key={Math.random() * 10000} className="h-12 border-t border-neutral-300 dark:border-neutral-400 flex justify-center items-center font-gothic dark:text-white">
-                                                               {item}
+                                                 settings.counter.map((item, index) => (
+                                                        <div key={Math.random() * 10000} className={`relative h-12 border-t border-neutral-300 dark:border-neutral-400 flex justify-center items-center font-gothic dark:text-white`}>
+                                                               <span className={`absolute -top-3 left-1/2 -translate-x-1/2 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{item}</span>
+                                                               {
+                                                                      settings.counter.length === index + 1 && (
+                                                                             <span className={`absolute -bottom-3 left-1/2 -translate-x-1/2 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{item + 1}</span>
+                                                                      )
+                                                               }
                                                         </div>
                                                  ))
                                           }
@@ -589,11 +596,10 @@ export default function ({ day }) {
                                                                       <div
                                                                              key={plan.id}
                                                                              style={{
-                                                                                    height: (plan.hours * 3) + "rem"
+                                                                                    height: ((plan.hours * 3)) + "rem"
                                                                              }}
                                                                              className={`${plan.lesson && "bg-green-100 dark:bg-neutral-400-50"} dark:text-white relative border border-t-0 border-r-0 border-neutral-300 dark:border-neutral-400 dark:border-b-neutral-400 flex flex-col justify-center items-center `}
                                                                       >
-
                                                                              {plan.lesson && (
                                                                                     <>
                                                                                            {/* hamber menu  */}

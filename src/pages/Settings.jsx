@@ -180,7 +180,6 @@ export default function Settings() {
 
        return (
               <div className="w-full mt-40">
-                     {console.log(learn)}
                      {/* bg blur {for leran} */}
                      <div style={{ display: learn.index ? "block" : "none" }} className="absolute top-0 left-0 w-full h-full backdrop-blur-sm z-99">
                             {/* description */}
@@ -242,7 +241,7 @@ export default function Settings() {
                                                  <h1 className="text-2xl py-4">افزودن خودکار درس ها</h1>
                                                  <div className="mt-4">
                                                         <p>طبق آموزش زیر (حتما با کامپیوتر) و از بخش "چاپ انتخاب واحد" در سایت بوستان ، برنامه خود تون رو کپی و در باکس زیر جایگذاری کنید </p>
-                                                        <p className="text-red-400">نکته مهم : تمام دیتای از پیش وارد شده حذف و باز نویسی میشوند</p>
+                                                        <p className="text-red-400 font-semibold">نکته مهم : تمام دیتای از پیش وارد شده حذف و باز نویسی میشوند - از فایل پی دی اف کپی نکنید ، فقط از سایت و بخش چاپ انتخاب واحد کپی کنید</p>
                                                         <div className="w-full h-28 border border-black mt-4 overflow-hidden rounded-lg relative">
                                                                <svg
                                                                       onClick={() => {
