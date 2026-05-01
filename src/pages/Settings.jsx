@@ -146,6 +146,7 @@ export default function Settings() {
                             }
                      }
               })
+              if (!data) return false;
               Del("plans");
               dispatch_Plan_Context({
                      type: PlanTypeContext.ADD_FULL_DATA_PLAN,
