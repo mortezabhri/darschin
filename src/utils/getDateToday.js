@@ -26,6 +26,9 @@ export function formatDatePlusDaysFrom(dateInput, days = 0) {
        return `${yyyy}/${mm}/${dd}`;
 }
 
+export function getTodayNumber() {
+       return (new Date().getDay() + 1) % 7
+}
 // export function formatDatePlusDaysFromReverse(dateInput, days = 0) {
 //        const d = new Date(dateInput); // می‌تواند رشته یا Date باشد
 //        d.setDate(d.getDate() + days);

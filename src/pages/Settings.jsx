@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ParseUniversitySchedule from "../utils/ParseUniversitySchedule";
 import { usePlans, PlanTypeContext } from "../contexts/Plans";
 import downloadFile from "../utils/downloadFile"
+import { getPermission, requestPermission } from "../utils/Notification";
 
 function checkFileInput(inp) {
        filePicker.current.addEventListener("change", async (e) => {
@@ -49,6 +50,8 @@ export default function Settings() {
               index: 0,
               text: ""
        });
+       const [refreshForNotif, setRefreshForNotif] = useState(false)
+
        useEffect(() => {
               if (learn.index > 8) setLearn({ index: 0, text: "" })
        }, [learn.index])
@@ -128,6 +131,20 @@ export default function Settings() {
               filePicker.current.click()
               filePicker.current.addEventListener("change", checkInputFile)
        })
+       const setPermission = () => {
+              console.log(getPermission())
+              switch (getPermission()) {
+                     case "denied": {
+                            return "دسترسی مسدود شده ❌"
+                     }
+                     case "granted": {
+                            return "دسترسی داده شده ✔"
+                     }
+                     default: {
+                            return "در انتظار دسترسی ⏳"
+                     }
+              }
+       }
 
        const generator = () => {
               if (!textarea) {
@@ -385,6 +402,25 @@ export default function Settings() {
                                                  </div>
                                           </div>
                                    </Modal>
+                            </div>
+                            {/* notification */}
+                            <div
+                                   className="flex flex-col justify-center items-center"
+                            >
+                                   <button
+                                          dir="rtl"
+                                          className="w-8/10 text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/30 shadow-xl py-2 rounded-lg "
+                                          onClick={async () => {
+                                                 const x = await requestPermission()
+                                                 setRefreshForNotif(prev => !prev)
+                                          }}
+                                   >
+                                          {
+                                                 getPermission() === "granted" ? "اعلان درس فعاله" : "اعلان درس غیرفعاله "
+                                          }
+                                          &nbsp;
+                                          <span>({setPermission()})</span>
+                                   </button>
                             </div>
                             {/* export / import */}
                             <div className="flex justify-center items-center px-13 gap-x-4">

@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 import { PlanProvider } from "./contexts/Plans";
 import NewVersion from "./components/NewVersion";
 import { toast } from 'react-toastify'
-
+// import { useNotification } from "./hooks/useNotification";
 
 // PAGES
 import Home from "./pages/Home";
@@ -21,6 +21,7 @@ function App() {
 
        const navigate = useNavigate();
        const location = useLocation();
+       // const notif = useNotification()
 
        useEffect(() => {
               // welcome page
