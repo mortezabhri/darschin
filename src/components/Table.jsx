@@ -576,10 +576,10 @@ export default function ({ day }) {
                                           {
                                                  settings.counter.map((item, index) => (
                                                         <div key={Math.random() * 10000} className={`relative h-12 border-t border-neutral-300 dark:border-neutral-400 flex justify-center items-center font-gothic dark:text-white`}>
-                                                               <span className={`absolute -top-3 left-1/2 -translate-x-1/2 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{item}</span>
+                                                               <span className={`absolute -top-3 left-1/2 -translate-x-1/2 px-1.5 ${index === 0 ? "bg-quaternary dark:bg-neutral-500 h-12 w-13 flex justify-center -top-4! my-shape" : "bg-quaternary dark:bg-neutral-500"}`}>{item}</span>
                                                                {
                                                                       settings.counter.length === index + 1 && (
-                                                                             <span className={`absolute -bottom-3 left-1/2 -translate-x-1/2 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{item + 1}</span>
+                                                                             <span className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-1 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{item + 1}</span>
                                                                       )
                                                                }
                                                         </div>

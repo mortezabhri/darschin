@@ -41,6 +41,9 @@ function checkFileInput(inp) {
 
 export default function Settings() {
 
+       const tl = useRef(null)
+       const ru = useRef(null)
+
        const [openSetting, setOpenSetting] = useState(false);
        const [opendownloader, setOpenDownloader] = useState(false);
        const [openCreatePlan, setOpenCreatePlan] = useState(false);
@@ -225,7 +228,7 @@ export default function Settings() {
                      {/* question mask {for learn} */}
                      <div
                             onClick={() => setLearn({ text: refreshDesc(1), index: 1 })}
-                            className="size-12 cursor-pointer animate-bounce rounded-full bg-[#ff9933] shadow-[0px_0px_12px_2px_#ff9933] absolute bottom-2 right-2"
+                            className="size-12 cursor-pointer animate-bounce rounded-full bg-[#ff9933] shadow-[0px_0px_12px_2px_#ff9933] absolute bottom-2 left-2"
                      >
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 400 400" fill="none" class="mdl-js">
                                    <path d="M142 125.853C155.049 97.8883 180.62 82.7645 200.381 78.4757C227.189 72.6575 249.859 84.0511 257.624 112.528C260.302 122.352 259.217 138.128 253.081 148.517C247.426 158.092 239.904 165.942 227.555 176.481C225.251 178.447 217.389 185.018 216.649 185.643C199.849 199.818 191.567 209.152 186.81 220.972C182.053 232.792 182.305 269.489 216.649 266.35" stroke="#000000" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
@@ -375,7 +378,8 @@ export default function Settings() {
                                    </button>
                                    <Modal isOpen={opendownloader} onClose={() => setOpenDownloader(prev => !prev)}>
                                           <div className="w-full rounded-xl bg-white dark:bg-neutral-600 mx-auto">
-                                                 <h1 className="w-full py-6 text-center font-morabba-bold text-2xl">قالب فایل دریافتی رو انتخاب کنید</h1>
+                                                 <h1 className="w-full py-4 text-center font-morabba-bold text-xl">قالب فایل دریافتی رو انتخاب کنید</h1>
+                                                 <h5 className="w-full pb-2 text-center font-morabba text-sm text-red-600">برای دانلود بدون مشکل فایل ها ¹ باید دسترسی به اینترنت داشته باشید ² گیتهاب وصل باشه (نت ملی نباشه)</h5>
                                                  <div className="w-full flex justify-center items-center gap-x-8 h-60 mt-4">
                                                         {/* png */}
                                                         <div className="w-full h-full border-3 border-neutral-400 shadow-2xl rounded-2xl" onClick={pngDownloadHandler}>
@@ -404,7 +408,7 @@ export default function Settings() {
                                    </Modal>
                             </div>
                             {/* notification */}
-                            <div
+                            {/* <div
                                    className="flex flex-col justify-center items-center"
                             >
                                    <button
@@ -421,7 +425,7 @@ export default function Settings() {
                                           &nbsp;
                                           <span>({setPermission()})</span>
                                    </button>
-                            </div>
+                            </div> */}
                             {/* export / import */}
                             <div className="flex justify-center items-center px-13 gap-x-4">
                                    <button
@@ -453,6 +457,39 @@ export default function Settings() {
                                           {Get("vocation") ? "پنج‌شنبه و جمعه فعاله" : "پنج‌شنبه و جمعه غیر فعاله"}
                                    </button>
                             </div>
+                            <div className="py-6"></div>
+                     </div>
+                     {/* creator detail */}
+                     <div className="absolute bottom-0 right-2 py-2 flex gap-2" dir="ltr">
+                            <span
+                                   onClick={e => {
+                                          // console.log(tl.current.style.width)
+                                          if (tl.current.style.width === "48px" || tl.current.style.width === "") {
+                                                 tl.current.style.width = "120px"
+                                          } else {
+                                                 tl.current.style.width = "48px"
+                                          }
+                                   }}
+                                   className="px-1 flex items-center border rounded-full size-12 border-neutral-300 transition-[width] overflow-hidden" ref={tl}>
+                                   <svg xmlns="http://www.w3.org/2000/svg" className="min-w-12 min-h-12 -ms-1" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 2000 2000" >
+                                          <path fillRule="nonzero" fill="#2a85f5" fillOpacity="1" d="M 770.160156 1060.738281 L 595.40625 1003.789062 C 595.40625 1003.789062 574.546875 995.320312 581.246094 976.109375 C 582.628906 972.140625 585.417969 968.769531 593.761719 962.960938 C 632.492188 935.96875 1310.519531 692.261719 1310.519531 692.261719 C 1310.519531 692.261719 1329.671875 685.808594 1340.980469 690.101562 C 1346.148438 692.058594 1349.449219 694.269531 1352.230469 702.371094 C 1353.238281 705.308594 1353.828125 711.570312 1353.75 717.789062 C 1353.699219 722.28125 1353.140625 726.441406 1352.738281 732.960938 C 1348.609375 799.589844 1225.050781 1296.871094 1225.050781 1296.871094 C 1225.050781 1296.871094 1217.660156 1325.96875 1191.171875 1326.960938 C 1181.511719 1327.320312 1169.78125 1325.371094 1155.769531 1313.308594 C 1103.789062 1268.589844 924.105469 1147.839844 884.402344 1121.28125 C 882.167969 1119.789062 881.527344 1117.839844 881.148438 1115.941406 C 880.589844 1113.140625 883.632812 1109.671875 883.632812 1109.671875 C 883.632812 1109.671875 1196.5 831.570312 1204.820312 802.378906 C 1205.46875 800.121094 1203.050781 799.011719 1199.769531 799.980469 C 1178.980469 807.628906 818.757812 1035.089844 779.003906 1060.210938 C 776.679688 1061.679688 770.160156 1060.738281 770.160156 1060.738281 " />
+                                   </svg>
+                                   <p className="text-xs text-blue-400 dark:text-blue-200 min-w-48">@mbhdev</p>
+                            </span>
+                            <span
+                                   onClick={e => {
+                                          // console.log(ru.current.style.width)
+                                          if (ru.current.style.width === "48px" || ru.current.style.width === "") {
+                                                 ru.current.style.width = "120px"
+                                          } else {
+                                                 ru.current.style.width = "48px"
+                                          }
+                                   }
+                                   }
+                                   className="px-1 flex items-center border rounded-full size-12 border-neutral-300 transition-[width] overflow-hidden gap-4" ref={ru}>
+                                   <img src="images/logo-rubika.png" className="min-w-5 w-5 ms-2.25" alt="" />
+                                   <p className="text-xs text-green-400 dark:text-green-200 min-w-5 -ms-0.75">@mbhrdev</p>
+                            </span>
                      </div>
               </div>
        )
