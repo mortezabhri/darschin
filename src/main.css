@@ -35,7 +35,9 @@
 
 @theme {
        --color-*: initial;
+       --breakpoint-xsl: 400px;
        --breakpoint-xs: 20rem;
+       --breakpoint-xss: 450px;
        --color-brand-primary: #123456;
        --color-primary: #FCCD2A;
        --color-secondary: #347928;
@@ -47,7 +49,6 @@
        --font-iranisans: "iranisans", sans-serif;
        --font-morabba-bold: "morabba-bold", sans-serif;
        --font-ghaf: "ghaf", sans-serif;
-       --breakpoint-xsl: 400px;
        /* Default Tailwind Colors */
        --color-red-50: #fde2e2;
        /* oklch(0.971 0.013 17.38) */
