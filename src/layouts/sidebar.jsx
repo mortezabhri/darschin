@@ -8,6 +8,19 @@ import Random from "../utils/Random";
 import { Link } from "react-router-dom";
 import { usePlans, PlanTypeContext } from "../contexts/Plans";
 // import { createPortal } from "react-dom";
+import { RiArrowDownWideLine } from "react-icons/ri";
+import { CiCalendar } from "react-icons/ci";
+import { IoIosArrowBack } from "react-icons/io";
+import { VscOpenInWindow } from "react-icons/vsc";
+import { LuNotebookPen } from "react-icons/lu";
+import { LuNotebookText } from "react-icons/lu";
+import { CiCircleQuestion } from "react-icons/ci";
+import { IoSettingsOutline } from "react-icons/io5";
+
+
+
+
+import useDragHandle from "../hooks/useDragHandle";
 
 const sidebar = () => {
 
@@ -33,6 +46,16 @@ const sidebar = () => {
               selInput.current.value = 0;
        }
 
+       useEffect(() => {
+              if (open) {
+                     document.querySelector("html").style.overflow = "hidden";
+              } else {
+                     document.querySelector("html").style.overflow = "";
+              }
+       }, [open])
+
+       useDragHandle(setOpen);
+
        return (
               <>
                      {/* hamber icon */}
@@ -44,32 +67,48 @@ const sidebar = () => {
                             </div>
                      </div>
                      {/* content */}
-                     <section className={`${open ? "rotate-x-0 rotate-y-0 opacity-100" : "rotate-y-15 rotate-x-15 opacity-0"} duration-300 w-full transition-all pointer-events-none h-full max-h-[550px] px-6 py-6 fixed top-1/2 left-1/2 -translate-1/2 z-4 `}>
-                            <div className={`min-w-xs max-w-lg h-full bg-white dark:bg-neutral-600 rounded-xl mx-auto ${open && "pointer-events-auto"} relative overflow-y-auto snone pt-4 pb-8`}>
+                     <section className={`${open ? "  opacity-100" : " opacity-0"} top-0 duration-300 transition-all w-full max-w-[500px] pointer-events-none h-dvh py-6 fixed left-1/2 -translate-x-1/2 z-4 `}>
+                            <div id="modalContainer" style={{ willChange: "transform" }} className={`${open ? "pointer-events-auto translate-y-0" : "translate-y-[520px]"} duration-300 animate-emphasized transition-all w-[calc(100%-24px)] max-w-full absolute mx-3 bottom-3 h-fit max-h-fit bg-white dark:bg-neutral-600 rounded-xl overflow-y-auto snone pt-4 pb-8`}>
                                    {/* button closed */}
-                                   <svg className="size-12 absolute top-0 right-0 cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => setOpen(prev => !prev)}>
-                                          <path d="M12 20.4C10.8969 20.4 9.80459 20.1827 8.78546 19.7606C7.76632 19.3384 6.84031 18.7197 6.0603 17.9397C5.28029 17.1597 4.66155 16.2337 4.23941 15.2145C3.81727 14.1954 3.6 13.1031 3.6 12C3.6 10.8969 3.81727 9.80459 4.23941 8.78546C4.66155 7.76632 5.28029 6.84031 6.0603 6.0603C6.84032 5.28029 7.76633 4.66155 8.78546 4.23941C9.8046 3.81727 10.8969 3.6 12 3.6C13.1031 3.6 14.1954 3.81727 15.2145 4.23941C16.2337 4.66155 17.1597 5.28029 17.9397 6.0603C18.7197 6.84032 19.3384 7.76633 19.7606 8.78546C20.1827 9.8046 20.4 10.8969 20.4 12C20.4 13.1031 20.1827 14.1954 19.7606 15.2145C19.3384 16.2337 18.7197 17.1597 17.9397 17.9397C17.1597 18.7197 16.2337 19.3384 15.2145 19.7606C14.1954 20.1827 13.1031 20.4 12 20.4L12 20.4Z" stroke="#2A4157" strokeOpacity="0.24" strokeWidth="1.2" />
-                                          <path d="M9 9L15 15" stroke="#222222" strokeWidth="1.2" strokeLinecap="round" />
-                                          <path d="M15 9L9 15" stroke="#222222" strokeWidth="1.2" strokeLinecap="round" />
-                                   </svg>
-                                   <div className="w-full font-iranisans">
+                                   <div id="dragHandle" style={{ touchAction: "none" }} className="w-full h-4 flex justify-center" onClick={() => setOpen(prev => !prev)}>
+                                          <div className="w-16 h-1 bg-neutral-300 rounded-full"></div>
+                                   </div>
+                                   <div className="w-full font-morabba">
                                           {/* logo */}
-                                          <div className="w-full h-38 text-2xl flex justify-center " dir="rtl">
-                                                 <h1 className="font-ghaf flex justify-center items-center text-3xl text-black dark:text-white">با</h1>
-                                                 <img src={`${Get("them") === "dark" ? "/darschin/images/DarsChinLogo-White.png" : "/darschin/images/DarsChinLogo-Black.png"}`} className="object-cover -mr-3" alt="" />
-                                                 <h1 className="font-ghaf flex justify-center items-center text-3xl -mr-4 text-black dark:text-white">به درسات نظم بده</h1>
+                                          <div className="w-full h-34 text-3xl flex justify-center -mt-2 mb-4" dir="rtl">
+                                                 <h1 className="font-ghaf flex justify-center items-center text-black dark:text-white">با</h1>
+                                                 <img src={`${Get("them") === "dark" ? "/darschin/images/DarsChinLogo-White.png" : "/darschin/images/DarsChinLogo-Black.png"}`} className="object-cover scale-75 -mr-8" alt="" />
+                                                 <h1 className="font-ghaf flex justify-center items-center -mr-8 text-black dark:text-white">به درسات نظم بده</h1>
                                           </div>
-                                          <div className="w-full flex flex-col items-center justify-center gap-y-6 text-xl h-full -mt-4" dir="rtl">
+                                          <div className="w-full flex flex-col items-center justify-center gap-y-3 text-xl h-full -mt-4" dir="rtl">
                                                  {/* today plans */}
                                                  <Link
                                                         onClick={() => setOpen(prev => !prev)}
                                                         to="/"
-                                                        className="inline-block w-8/10 cursor-pointer bg-neutral-200 dark:bg-neutral-400 shadow-xl py-2 rounded-lg text-center"
+                                                        className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white rounded-lg text-center"
                                                  >
-                                                        برنامه امروز
+                                                        <div className="flex items-center gap-3">
+                                                               <div className="size-8 bg-[#0c8a1226] flex justify-center items-center rounded-[8px]">
+                                                                      <CiCalendar className="text-[#017100] dark:text-[#02dd00]" />
+                                                               </div>
+                                                               <span className="text-base">برنامه امروز</span>
+                                                        </div>
+                                                        <div>
+                                                               <IoIosArrowBack />
+                                                        </div>
                                                  </Link>
                                                  {/* add plan */}
-                                                 <button className="w-8/10 cursor-pointer bg-neutral-200 dark:bg-neutral-400 shadow-xl py-2 rounded-lg" onClick={() => setOpenAddPlan(prev => !prev)}>افزودن درس جدید</button>
+                                                 <button className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white rounded-lg" onClick={() => setOpenAddPlan(prev => !prev)}>
+                                                        <div className="flex items-center gap-3">
+                                                               <div className="size-8 bg-[#0051ff33] flex justify-center items-center rounded-[8px]">
+                                                                      <LuNotebookPen strokeWidth={1} className="text-[#003491] dark:text-[#6fa2ff]" />
+                                                               </div>
+                                                               <span className="text-base">افزودن درس جدید</span>
+                                                        </div>
+                                                        <div>
+                                                               <VscOpenInWindow />
+                                                        </div>
+                                                 </button>
                                                  <Modal isOpen={openAddPlan} onClose={() => setOpenAddPlan(prev => !prev)}>
                                                         <div className="w-full rounded-xl bg-white dark:bg-neutral-600 mx-auto" dir="rtl">
                                                                <h1 className="w-full py-6 text-center font-morabba-bold text-3xl">افزودن درس جدید</h1>
@@ -158,25 +197,49 @@ const sidebar = () => {
                                                  <Link
                                                         onClick={() => setOpen(prev => !prev)}
                                                         to="/plans"
-                                                        className="inline-block w-8/10 cursor-pointer bg-neutral-200 dark:bg-neutral-400 shadow-xl py-2 rounded-lg text-center"
+                                                        className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white rounded-lg text-center"
                                                  >
-                                                        نمایش تمام درس ها
+                                                        <div className="flex items-center gap-3">
+                                                               <div className="size-8 bg-[#ff145733] flex justify-center items-center rounded-[8px]">
+                                                                      <LuNotebookText strokeWidth={1} className="text-[#a50331] dark:text-[#ff6993]" />
+                                                               </div>
+                                                               <span className="text-base"> نمایش تمام درس ها</span>
+                                                        </div>
+                                                        <div>
+                                                               <IoIosArrowBack />
+                                                        </div>
                                                  </Link>
                                                  {/* FAQ */}
                                                  <Link
                                                         to="/faq"
-                                                        className="w-8/10 cursor-pointer bg-neutral-200 dark:bg-neutral-400 shadow-xl py-2 rounded-lg text-center"
+                                                        className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white py-2 rounded-lg text-center"
                                                         onClick={() => setOpen(prev => !prev)}
                                                  >
-                                                        سوالات متداول
+                                                        <div className="flex items-center gap-3">
+                                                               <div className="size-8 bg-[#7f047f40] flex justify-center items-center rounded-[8px]">
+                                                                      <CiCircleQuestion strokeWidth={0.5} className="text-[#9d009d] dark:text-[#ff38ff]" />
+                                                               </div>
+                                                               <span className="text-base">  سوالات متداول</span>
+                                                        </div>
+                                                        <div>
+                                                               <IoIosArrowBack />
+                                                        </div>
                                                  </Link>
                                                  {/* Settings */}
                                                  <Link
                                                         to="/settings"
-                                                        className="w-8/10 cursor-pointer bg-neutral-200 dark:bg-neutral-400 shadow-xl py-2 rounded-lg text-center"
+                                                        className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white py-2 rounded-lg text-center"
                                                         onClick={() => setOpen(prev => !prev)}
                                                  >
-                                                        تنظیمات
+                                                        <div className="flex items-center gap-3">
+                                                               <div className="size-8 bg-[#009f9f40] flex justify-center items-center rounded-[8px]">
+                                                                      <IoSettingsOutline strokeWidth={1} className="text-[#005959] dark:text-[#15ffff]" />
+                                                               </div>
+                                                               <span className="text-base"> تنظیمات</span>
+                                                        </div>
+                                                        <div>
+                                                               <IoIosArrowBack />
+                                                        </div>
                                                  </Link>
                                           </div>
                                    </div>

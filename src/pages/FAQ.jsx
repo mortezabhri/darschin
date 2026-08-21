@@ -51,7 +51,7 @@ export default function FAQ() {
                      <section className='w-full px-4 '>
                             <div className="absolute top-1 right-0 w-full h-52 flex justify-center items-center">
                                    <img src="/darschin/images/title_shape/title_shape_blue.png" className="w-full h-full" alt="" />
-                                   <p className="absolute text-2xl font-morabba-bold">سوالات متداول</p>
+                                   <p className="absolute text-2xl font-morabba-bold -mt-1">سوالات متداول</p>
                             </div>
                             <div className='mt-40 mb-16' dir='rtl'>
                                    <Accordion>

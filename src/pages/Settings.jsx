@@ -238,7 +238,7 @@ export default function Settings() {
                      {/* svg box */}
                      <div className="absolute top-1 right-0 w-full h-52 flex justify-center items-center">
                             <img src="/darschin/images/title_shape/title_shape_orange.png" className="w-full h-full" alt="" />
-                            <p className="absolute text-2xl font-morabba-bold">تنظیمات</p>
+                            <p className="absolute text-2xl font-morabba-bold -mt-1">تنظیمات</p>
                      </div>
                      {/* content */}
                      <div className="w-full font-iranisans font-[500] space-y-8 ">

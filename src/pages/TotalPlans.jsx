@@ -162,7 +162,7 @@ export default function TotalPlans() {
                      {/* svg box */}
                      <div className="absolute top-1 right-0 w-full h-52 flex justify-center items-center">
                             <img src="/darschin/images/title_shape/title_shape_green.png" className="w-full h-full" alt="" />
-                            <p className="absolute text-2xl font-morabba-bold">لیست تمام درس ها</p>
+                            <p className="absolute text-2xl font-morabba-bold -mt-1">لیست تمام درس ها</p>
                      </div>
                      <div className={`${(Get("download_pdf_handler") || Get("download_png_handler")) && "px-6 pt-2 bg-quaternary dark:bg-neutral-500"} mt-42 flex flex-col gap-y-8 pb-8`} ref={pdfRef}>
                             {

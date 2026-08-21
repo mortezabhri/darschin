@@ -12,6 +12,7 @@ import { usePlans, PlanTypeContext } from "../contexts/Plans";
 import HamberMenu from "../components/HamberMenu";
 import Counter from "../utils/Counter";
 import TimeSelector from "../components/time-selector/TimePicker";
+import toPersianDigit from "../utils/toPersianDigit";
 
 export default function ({ day }) {
 
@@ -304,23 +305,23 @@ export default function ({ day }) {
                                           </div>
                                           <div className="flex gap-x-2">
                                                  <p className="dark:text-neutral-300 text-neutral-400 text-xl">تعداد واحدتئوری  : </p>
-                                                 <p className="text-lg">{allUnits.split("-")[0]}</p>
+                                                 <p className="text-lg">{toPersianDigit(allUnits.split("-")[0])}</p>
                                           </div>
                                           <div className="flex gap-x-2">
                                                  <p className="dark:text-neutral-300 text-neutral-400 text-xl">تعداد واحد عملی  : </p>
-                                                 <p className="text-lg">{allUnits.split("-")[1]}</p>
+                                                 <p className="text-lg">{toPersianDigit(allUnits.split("-")[1])}</p>
                                           </div>
                                           <div className="flex gap-x-2">
                                                  <p className="dark:text-neutral-300 text-neutral-400 text-xl">تعداد کل واحد ها   : </p>
-                                                 <p className="text-lg">{allUnits.split("-")[2]}</p>
+                                                 <p className="text-lg">{toPersianDigit(allUnits.split("-")[2])}</p>
                                           </div>
                                           <div className="flex gap-x-2">
                                                  <p className="dark:text-neutral-300 text-neutral-400 text-xl">تاریخ امتحان  : </p>
-                                                 <p className="text-lg">{examDay}</p>
+                                                 <p className="text-lg">{toPersianDigit(examDay)}</p>
                                           </div>
                                           <div className="flex gap-x-2">
                                                  <p className="dark:text-neutral-300 text-neutral-400 text-xl">زمان امتحان  : </p>
-                                                 <p className="text-lg">{examTime}</p>
+                                                 <p className="text-lg">{toPersianDigit(examTime)}</p>
                                           </div>
                                    </>
                             </div>
@@ -575,11 +576,11 @@ export default function ({ day }) {
                                           {/* <div className="py-2 w-full"></div> */}
                                           {
                                                  settings.counter.map((item, index) => (
-                                                        <div key={Math.random() * 10000} className={`relative h-12 border-t border-neutral-300 dark:border-neutral-400 flex justify-center items-center font-gothic dark:text-white`}>
-                                                               <span className={`absolute -top-3 left-1/2 -translate-x-1/2 px-1.5 ${index === 0 ? "bg-quaternary dark:bg-neutral-500 h-12 w-13 max-xss:w-10 flex justify-center -top-4! my-shape" : "bg-quaternary dark:bg-neutral-500"}`}>{item}</span>
+                                                        <div key={Math.random() * 10000} className={`relative h-12 border-t border-neutral-300 dark:border-neutral-400 flex justify-center items-center font-morabba dark:text-white`}>
+                                                               <span className={`absolute -top-3 left-1/2 -translate-x-1/2 px-1.5 ${index === 0 ? "bg-quaternary dark:bg-neutral-500 h-12 w-13 max-xss:w-10 flex justify-center -top-4! my-shape" : "bg-quaternary dark:bg-neutral-500"}`}>{toPersianDigit(item)}</span>
                                                                {
                                                                       settings.counter.length === index + 1 && (
-                                                                             <span className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-1 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{item + 1}</span>
+                                                                             <span className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-1 ${index === 0 ? "bg-transparent" : "bg-quaternary dark:bg-neutral-500"}`}>{Number(item + 1).toLocaleString("fa")}</span>
                                                                       )
                                                                }
                                                         </div>
@@ -646,7 +647,7 @@ export default function ({ day }) {
                                                                                            </div>
                                                                                            {/* title */}
                                                                                            <p>{plan.lesson}</p>
-                                                                                           <p className="mt-1 text-xs text-neutral-400 dark:text-neutral-300">{plan.description}</p>
+                                                                                           <p className="mt-1 text-xs text-neutral-400 dark:text-neutral-300">{toPersianDigit(plan.description)}</p>
                                                                                            {/* show info */}
                                                                                            <svg
                                                                                                   onClick={() => {
