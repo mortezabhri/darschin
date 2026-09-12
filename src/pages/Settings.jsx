@@ -257,10 +257,9 @@ export default function Settings() {
                                           <p className="text-xl mb-1">افزودن خودکار درس ها</p>
                                           <p className="text-base">(مخصوص دانشجویان دانشگاه ملی مهارت)</p>
                                    </button>
-                                   <Modal isOpen={openCreatePlan} onClose={() => setOpenCreatePlan(prev => !prev)}>
+                                   <Modal isOpen={openCreatePlan} onClose={() => setOpenCreatePlan(prev => !prev)} textTitle={"افزودن خودکار درس ها"} state={2}>
                                           <div className="w-full font-iranisans text-center">
-                                                 <h1 className="text-2xl py-4">افزودن خودکار درس ها</h1>
-                                                 <div className="mt-4">
+                                                 <div className="mt-2">
                                                         <p>طبق آموزش زیر (حتما با کامپیوتر) و از بخش "چاپ انتخاب واحد" در سایت بوستان ، برنامه خود تون رو کپی و در باکس زیر جایگذاری کنید </p>
                                                         <p className="text-red-400 font-semibold">نکته مهم : تمام دیتای از پیش وارد شده حذف و باز نویسی میشوند - از فایل پی دی اف کپی نکنید ، فقط از سایت و بخش چاپ انتخاب واحد کپی کنید</p>
                                                         <div className="w-full h-28 border border-black mt-4 overflow-hidden rounded-lg relative">
@@ -282,7 +281,7 @@ export default function Settings() {
                                                                ></textarea>
                                                                <div
                                                                       onClick={generator}
-                                                                      className="w-1/10 h-32 cursor-pointer rounded-lg px-2 text-sm flex justify-center items-center bg-green-400 dark:bg-green-700/80">
+                                                                      className="w-1/10 min-w-12 h-32 cursor-pointer rounded-lg px-2 text-sm flex justify-center items-center bg-green-400 dark:bg-green-700/80">
                                                                       <p className="leading-6">برو که رفتیم</p>
                                                                </div>
                                                         </div>
@@ -299,11 +298,11 @@ export default function Settings() {
                                    className="flex flex-col justify-center items-center"
                             >
                                    <button className="w-8/10 text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg" onClick={() => setOpenSetting(prev => !prev)}>تنظیم تایم روز</button>
-                                   <Modal isOpen={openSetting} onClose={() => setOpenSetting(prev => !prev)}>
+                                   <Modal isOpen={openSetting} onClose={() => setOpenSetting(prev => !prev)} textTitle={"تنظیم تایم روز"} state={1}>
                                           <div className="w-full rounded-xl bg-white dark:bg-neutral-600 mx-auto">
-                                                 <h1 className="w-full py-6 text-center font-morabba-bold text-2xl">تنظیم تایم روز</h1>
-                                                 <div className="w-full h-50 ">
+                                                 <div className="w-full mt-6">
                                                         <TimeSelector
+                                                               mood={1}
                                                                callback={(e) => {
                                                                       dispatch({ type: SettingsContextTypes.CHANGE_HOURS, startHour: e.from, endHour: e.to });
                                                                       setOpenSetting(false);
@@ -376,13 +375,13 @@ export default function Settings() {
                                    >
                                           دانلود لیست تمام درس ها
                                    </button>
-                                   <Modal isOpen={opendownloader} onClose={() => setOpenDownloader(prev => !prev)}>
+                                   <Modal isOpen={opendownloader} onClose={() => setOpenDownloader(prev => !prev)} textTitle={"دانلود درس ها در قالب فایل"} state={4}>
                                           <div className="w-full rounded-xl bg-white dark:bg-neutral-600 mx-auto">
-                                                 <h1 className="w-full py-4 text-center font-morabba-bold text-xl">قالب فایل دریافتی رو انتخاب کنید</h1>
-                                                 <h5 className="w-full pb-2 text-center font-morabba text-sm text-red-600">برای دانلود بدون مشکل فایل ها ¹ باید دسترسی به اینترنت داشته باشید ² گیتهاب وصل باشه (نت ملی نباشه)</h5>
-                                                 <div className="w-full flex justify-center items-center gap-x-8 h-60 mt-4">
+                                                 {/* <h1 className="w-full py-4 text-center font-morabba-bold text-xl">قالب فایل دریافتی رو انتخاب کنید</h1> */}
+                                                 <h5 className="w-full pb-2 text-center font-morabba text-sm text-red-600 mt-4">برای دانلود بدون مشکل فایل ها ¹ باید دسترسی به اینترنت داشته باشید ² گیتهاب وصل باشه (نت ملی نباشه)</h5>
+                                                 <div className="w-full flex justify-center items-center gap-x-3 h-40 mt-4">
                                                         {/* png */}
-                                                        <div className="w-full h-full border-3 border-neutral-400 shadow-2xl rounded-2xl" onClick={pngDownloadHandler}>
+                                                        <div className="w-full h-full border-3 border-neutral-400 shadow-2xl rounded-2xl p-3" onClick={pngDownloadHandler}>
                                                                <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full stroke-neutral-400 dark:stroke-neutral-300" viewBox="0 0 24 24" fill="none">
                                                                       <path d="M4 4C4 3.44772 4.44772 3 5 3H14H14.5858C14.851 3 15.1054 3.10536 15.2929 3.29289L19.7071 7.70711C19.8946 7.89464 20 8.149 20 8.41421V20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V4Z" stroke="" strokeWidth="1" strokeLinecap="round" />
                                                                       <path d="M20 8H15V3" stroke="" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
@@ -393,7 +392,7 @@ export default function Settings() {
                                                                </svg>
                                                         </div>
                                                         {/* pdf */}
-                                                        <div className="w-full h-full border-3 border-neutral-400 shadow-2xl rounded-2xl" onClick={pdfDownloadHandler}>
+                                                        <div className="w-full h-full border-3 border-neutral-400 shadow-2xl rounded-2xl p-3" onClick={pdfDownloadHandler}>
                                                                <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full stroke-neutral-400 dark:stroke-neutral-300" viewBox="0 0 24 24" fill="none" >
                                                                       <path d="M4 4C4 3.44772 4.44772 3 5 3H14H14.5858C14.851 3 15.1054 3.10536 15.2929 3.29289L19.7071 7.70711C19.8946 7.89464 20 8.149 20 8.41421V20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V4Z" stroke="" strokeWidth="1" strokeLinecap="round" />
                                                                       <path d="M20 8H15V3" stroke="" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
@@ -427,7 +426,7 @@ export default function Settings() {
                                    </button>
                             </div> */}
                             {/* export / import */}
-                            <div className="flex justify-center items-center px-13 gap-x-4">
+                            <div className="flex justify-center items-center px-10 gap-x-2">
                                    <button
                                           style={learn.index === 5 ? {
                                                  position: "relative",

@@ -16,11 +16,16 @@ import { LuNotebookPen } from "react-icons/lu";
 import { LuNotebookText } from "react-icons/lu";
 import { CiCircleQuestion } from "react-icons/ci";
 import { IoSettingsOutline } from "react-icons/io5";
-
-
-
-
 import useDragHandle from "../hooks/useDragHandle";
+import {
+       HiOutlineBookOpen,
+       HiOutlineCalendarDays,
+       HiOutlineChatBubbleBottomCenterText,
+       HiOutlineChevronDown,
+       HiOutlineClock,
+} from "react-icons/hi2";
+import { FiRotateCcw } from "react-icons/fi";
+
 
 const sidebar = () => {
 
@@ -68,12 +73,12 @@ const sidebar = () => {
                      </div>
                      {/* content */}
                      <section className={`${open ? "  opacity-100" : " opacity-0"} top-0 duration-300 transition-all w-full max-w-[500px] pointer-events-none h-dvh py-6 fixed left-1/2 -translate-x-1/2 z-4 `}>
-                            <div id="modalContainer" style={{ willChange: "transform" }} className={`${open ? "pointer-events-auto translate-y-0" : "translate-y-[520px]"} duration-300 animate-emphasized transition-all w-[calc(100%-24px)] max-w-full absolute mx-3 bottom-3 h-fit max-h-fit bg-white dark:bg-neutral-600 rounded-xl overflow-y-auto snone pt-4 pb-8`}>
+                            <div id="modalContainer" style={{ willChange: "transform" }} className={`${open ? "pointer-events-auto translate-y-0" : "translate-y-[520px]"} duration-300 animate-emphasized transition-all w-[calc(100%-24px)] max-w-full absolute mx-3 bottom-3 h-fit max-h-fit bg-white dark:bg-neutral-600 dark:border-[#2a2e3c] dark:border rounded-xl overflow-y-auto snone pt-4 pb-8`}>
                                    {/* button closed */}
-                                   <div id="dragHandle" style={{ touchAction: "none" }} className="w-full h-4 flex justify-center" onClick={() => setOpen(prev => !prev)}>
+                                   <div className="w-full h-1 flex justify-center">
                                           <div className="w-16 h-1 bg-neutral-300 rounded-full"></div>
                                    </div>
-                                   <div className="w-full font-morabba">
+                                   <div id="dragHandle" className="w-full font-morabba" style={{ touchAction: "none" }}>
                                           {/* logo */}
                                           <div className="w-full h-34 text-3xl flex justify-center -mt-2 mb-4" dir="rtl">
                                                  <h1 className="font-ghaf flex justify-center items-center text-black dark:text-white">با</h1>
@@ -97,102 +102,6 @@ const sidebar = () => {
                                                                <IoIosArrowBack />
                                                         </div>
                                                  </Link>
-                                                 {/* add plan */}
-                                                 <button className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white rounded-lg" onClick={() => setOpenAddPlan(prev => !prev)}>
-                                                        <div className="flex items-center gap-3">
-                                                               <div className="size-8 bg-[#0051ff33] flex justify-center items-center rounded-[8px]">
-                                                                      <LuNotebookPen strokeWidth={1} className="text-[#003491] dark:text-[#6fa2ff]" />
-                                                               </div>
-                                                               <span className="text-base">افزودن درس جدید</span>
-                                                        </div>
-                                                        <div>
-                                                               <VscOpenInWindow />
-                                                        </div>
-                                                 </button>
-                                                 <Modal isOpen={openAddPlan} onClose={() => setOpenAddPlan(prev => !prev)}>
-                                                        <div className="w-full rounded-xl bg-white dark:bg-neutral-600 mx-auto" dir="rtl">
-                                                               <h1 className="w-full py-6 text-center font-morabba-bold text-3xl">افزودن درس جدید</h1>
-                                                               <div className="py-4">
-                                                                      {/* name */}
-                                                                      <div className="w-full font-iranisans mb-2">
-                                                                             <label htmlFor="name" className="block mb-2 ">
-                                                                                    نام درس
-                                                                             </label>
-                                                                             <input
-                                                                                    ref={lessonInput}
-                                                                                    autoComplete="off"
-                                                                                    onChange={e => setLesson(e.target.value)}
-                                                                                    defaultValue={lesson}
-                                                                                    id="name" type="text" placeholder="برنامه سازی" className="w-full py-2 transition-all outline outline-neutral-300 text-base rounded text-gray-900 dark:text-neutral-100 placeholder:text-gray-400 focus:outline-secondary focus:outline-1 px-2" />
-                                                                      </div>
-                                                                      {/* desc */}
-                                                                      <div className="w-full font-iranisans mb-2">
-                                                                             <label htmlFor="name" className="block mb-2 ">
-                                                                                    توضیحات
-                                                                             </label>
-                                                                             <input
-                                                                                    ref={descInput}
-                                                                                    autoComplete="off"
-                                                                                    onChange={e => setDescription(e.target.value)}
-                                                                                    defaultValue={description}
-                                                                                    id="name" type="text" placeholder="کلاس 1112 ، طبقه دوم" className="w-full py-2 transition-all outline outline-neutral-300 text-base rounded text-gray-900 dark:text-neutral-100 placeholder:text-gray-400 focus:outline-secondary focus:outline-1 px-2" />
-                                                                      </div>
-                                                                      {/* select box */}
-                                                                      <div className="w-full font-iranisans">
-                                                                             <label htmlFor="simple-select" className="block mb-2 ">
-                                                                                    انتخاب روز هفته
-                                                                             </label>
-                                                                             <select id="simple-select"
-                                                                                    ref={selInput}
-                                                                                    defaultValue={selectValue}
-                                                                                    onChange={e => setSelectValue(e.target.value)}
-                                                                                    className="block w-full rounded-md border-1 outline-1 outline-neutral-300 border-neutral-300 bg-white dark:bg-neutral-700 px-3 py-2 shadow-sm focus:border-secondary focus:outline-secondary">
-                                                                                    <option value={0}>شنبه</option>
-                                                                                    <option value={1}>یکشنبه</option>
-                                                                                    <option value={2}>دوشنبه</option>
-                                                                                    <option value={3}>سه شنبه</option>
-                                                                                    <option value={4}>چهار شنبه</option>
-                                                                                    <option value={5}>پنج شنبه</option>
-                                                                                    <option value={6}>جمعه</option>
-                                                                             </select>
-                                                                      </div>
-                                                               </div>
-                                                               <div className="w-full h-50 ">
-                                                                      <TimeSelector
-                                                                             callback={e => {
-                                                                                    if (!lesson || !description) {
-                                                                                           notifyError("ابتدا فیلد ها رو پر کنید");
-                                                                                           return;
-                                                                                    }
-                                                                                    const data = {
-                                                                                           start: e.from,
-                                                                                           end: e.to,
-                                                                                           day: selectValue,
-                                                                                           lesson: lesson,
-                                                                                           description: description,
-                                                                                           hours: Counter(e.from, e.to).length,
-                                                                                           id: Random((Get("plans") ?? []))
-                                                                                    };
-
-                                                                                    //add plan
-                                                                                    dispatch_Plan_Context({
-                                                                                           type: PlanTypeContext.ADD_PLAN,
-                                                                                           addingData: data
-                                                                                    })
-
-                                                                                    // reset 
-                                                                                    // resetFunc();
-                                                                                    // console.log("ok", lesson, description, selectValue);
-                                                                             }}
-                                                                             defaultStart="08"
-                                                                             defaultEnd="10"
-                                                                      />
-                                                               </div>
-                                                               <div className="w-full py-2 -mt-2 rounded-xl bg-red-200 font-iranisans text-center cursor-pointer" onClick={resetFunc}>
-                                                                      ریست کردن فیلد ها
-                                                               </div>
-                                                        </div>
-                                                 </Modal>
                                                  {/* all plans */}
                                                  <Link
                                                         onClick={() => setOpen(prev => !prev)}
@@ -209,6 +118,165 @@ const sidebar = () => {
                                                                <IoIosArrowBack />
                                                         </div>
                                                  </Link>
+                                                 {/* add plan */}
+                                                 <button className="flex justify-between items-center p-3 w-8/10 cursor-pointer  dark:bg-[#1b1e27] border border-[#00000026] dark:text-white rounded-lg" onClick={() => setOpenAddPlan(prev => !prev)}>
+                                                        <div className="flex items-center gap-3">
+                                                               <div className="size-8 bg-[#0051ff33] flex justify-center items-center rounded-[8px]">
+                                                                      <LuNotebookPen strokeWidth={1} className="text-[#003491] dark:text-[#6fa2ff]" />
+                                                               </div>
+                                                               <span className="text-base">افزودن درس جدید</span>
+                                                        </div>
+                                                        <div>
+                                                               <VscOpenInWindow />
+                                                        </div>
+                                                 </button>
+                                                 <Modal isOpen={openAddPlan} onClose={() => setOpenAddPlan(prev => !prev)} textTitle={"افزودن درس جدید"} state={1}>
+                                                        <div
+                                                               className="w-full text-[#f4f6f8] pt-4"
+                                                               dir="rtl"
+                                                        >
+                                                               <div className="py-0">
+                                                                      {/* name */}
+                                                                      <div className="w-full font-iranisans mb-[20px]">
+                                                                             <div className="mb-[14px] flex items-center gap-2 sm:mb-[18px] md:mb-[23px] md:gap-3">
+                                                                                    <span className="h-6 w-[3px] rounded-full bg-[#74e89a] md:h-8 md:w-[4px]" />
+                                                                                    <h2 className="font-iranisans text-[18px] font-bold text-neutral-500 dark:text-[#f5f6f8] sm:text-[20px] md:text-[24px]">نام درس</h2>
+                                                                             </div>
+
+                                                                             <div className="relative">
+                                                                                    <input
+                                                                                           ref={lessonInput}
+                                                                                           autoComplete="off"
+                                                                                           onChange={e => setLesson(e.target.value)}
+                                                                                           defaultValue={lesson}
+                                                                                           id="name"
+                                                                                           type="text"
+                                                                                           placeholder="برنامه سازی"
+                                                                                           className="w-full transition-all h-[54px] rounded-[14px] border border-neutral-100 dark:border-[#3a424d] bg-white dark:bg-[#161c25] py-0 pr-[16px] pl-[48px] text-[15px] font-normal text-neutral-500 dark:text-[#f6f7f9] outline-none placeholder:text-[#6f7884] focus:border-[#74e89a] focus:ring-2 focus:ring-[#74e89a]/15 sm:h-[60px] sm:text-[16px]"
+                                                                                    />
+
+                                                                                    <HiOutlineBookOpen
+                                                                                           className="pointer-events-none absolute left-[15px] top-1/2 h-5 w-5 -translate-y-1/2 text-[#74e89a] stroke-[1.7]"
+                                                                                           aria-hidden="true"
+                                                                                    />
+                                                                             </div>
+                                                                      </div>
+
+                                                                      {/* desc */}
+                                                                      <div className="w-full font-iranisans mb-[22px]">
+                                                                             <div className="mb-[14px] flex items-center gap-2 sm:mb-[18px] md:mb-[23px] md:gap-3">
+                                                                                    <span className="h-6 w-[3px] rounded-full bg-[#74e89a] md:h-8 md:w-[4px]" />
+                                                                                    <h2 className="font-iranisans text-[18px] font-bold text-neutral-500 dark:text-[#f5f6f8] sm:text-[20px] md:text-[24px]">توضیحات</h2>
+                                                                             </div>
+
+                                                                             <div className="relative">
+                                                                                    <input
+                                                                                           ref={descInput}
+                                                                                           autoComplete="off"
+                                                                                           onChange={e => setDescription(e.target.value)}
+                                                                                           defaultValue={description}
+                                                                                           id="name"
+                                                                                           type="text"
+                                                                                           placeholder="کلاس 1112 ، طبقه دوم"
+                                                                                           className="w-full transition-all h-[58px] rounded-[14px] border border-neutral-100 dark:border-[#3a424d] bg-white dark:bg-[#161c25] py-0 pr-[16px] pl-[48px] text-[14px] font-normal text-neutral-500 dark:text-[#f6f7f9] outline-none placeholder:text-[#6f7884] focus:border-[#74e89a] focus:ring-2 focus:ring-[#74e89a]/15 sm:h-[64px] sm:text-[16px]"
+                                                                                    />
+
+                                                                                    <HiOutlineChatBubbleBottomCenterText
+                                                                                           className="pointer-events-none absolute left-[15px] top-1/2 h-5 w-5 -translate-y-1/2 text-[#74e89a] stroke-[1.7]"
+                                                                                           aria-hidden="true"
+                                                                                    />
+                                                                             </div>
+                                                                      </div>
+
+                                                                      {/* select box */}
+                                                                      <div className="w-full font-iranisans">
+                                                                             <div className="mb-[14px] flex items-center gap-2 sm:mb-[18px] md:mb-[23px] md:gap-3">
+                                                                                    <span className="h-6 w-[3px] rounded-full bg-[#74e89a] md:h-8 md:w-[4px]" />
+                                                                                    <h2 className="font-iranisans text-[18px] font-bold text-neutral-500 dark:text-[#f5f6f8] sm:text-[20px] md:text-[24px]">انتخاب روز هفته</h2>
+                                                                             </div>
+
+                                                                             <div className="relative">
+                                                                                    <HiOutlineCalendarDays
+                                                                                           className="pointer-events-none absolute right-[15px] top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-[#74e89a] stroke-[1.7]"
+                                                                                           aria-hidden="true"
+                                                                                    />
+
+                                                                                    <select
+                                                                                           id="simple-select"
+                                                                                           ref={selInput}
+                                                                                           defaultValue={selectValue}
+                                                                                           onChange={e => setSelectValue(e.target.value)}
+                                                                                           className="block w-full py-2 h-[54px] appearance-none rounded-[14px] border border-neutral-100 dark:border-[#3a424d] bg-white dark:bg-[#161c25] pr-[46px] pl-[44px] text-[15px] font-medium text-neutral-500 dark:text-[#f5f7f8] shadow-none outline-none sm:h-[60px] sm:text-[16px]"
+                                                                                    >
+                                                                                           <option value={0}>شنبه</option>
+                                                                                           <option value={1}>یکشنبه</option>
+                                                                                           <option value={2}>دوشنبه</option>
+                                                                                           <option value={3}>سه شنبه</option>
+                                                                                           <option value={4}>چهار شنبه</option>
+                                                                                           <option value={5}>پنج شنبه</option>
+                                                                                           <option value={6}>جمعه</option>
+                                                                                    </select>
+
+                                                                                    <HiOutlineChevronDown
+                                                                                           className="pointer-events-none absolute left-[15px] top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-500 dark:text-[#dfe4e9] stroke-[1.8]"
+                                                                                           aria-hidden="true"
+                                                                                    />
+                                                                             </div>
+                                                                      </div>
+                                                               </div>
+
+                                                               {/* time selector */}
+                                                               <div className="w-full mt-[26px] h-auto font-iranisans">
+                                                                      <div className="mb-[18px] flex items-center gap-2 sm:mb-[18px] md:mb-[23px] md:gap-3">
+                                                                             <span className="h-6 w-[3px] rounded-full bg-[#74e89a] md:h-8 md:w-[4px]" />
+                                                                             <h2 className="font-iranisans text-[18px] font-bold text-neutral-500 dark:text-[#f5f6f8]">بازه زمانی کلاس</h2>
+                                                                      </div>
+
+                                                                      <TimeSelector
+                                                                             mood={1}
+                                                                             callback={e => {
+                                                                                    if (!lesson || !description) {
+                                                                                           notifyError("ابتدا فیلد ها رو پر کنید");
+                                                                                           return;
+                                                                                    }
+
+                                                                                    const data = {
+                                                                                           start: e.from,
+                                                                                           end: e.to,
+                                                                                           day: selectValue,
+                                                                                           lesson: lesson,
+                                                                                           description: description,
+                                                                                           hours: Counter(e.from, e.to).length,
+                                                                                           id: Random((Get("plans") ?? []))
+                                                                                    };
+
+                                                                                    //add plan
+                                                                                    dispatch_Plan_Context({
+                                                                                           type: PlanTypeContext.ADD_PLAN,
+                                                                                           addingData: data
+                                                                                    })
+
+                                                                                    // reset
+                                                                                    // resetFunc();
+                                                                                    // console.log("ok", lesson, description, selectValue);
+                                                                             }}
+                                                                             defaultStart="08"
+                                                                             defaultEnd="10"
+                                                                      />
+                                                               </div>
+
+                                                               <div
+                                                                      className="w-full font-iranisans text-center cursor-pointer mt-[14px] flex h-[48px] items-center justify-center gap-2 rounded-[13px] border border-[#ef7676]/30 bg-[#ef7676]/10 px-3 py-0 text-[13px] font-medium text-[#ff9b9b] transition-all duration-200 hover:bg-[#ef7676]/15 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-[#ef7676]/20 sm:h-[50px] sm:text-[14px]"
+                                                                      onClick={resetFunc}
+                                                               >
+                                                                      <FiRotateCcw
+                                                                             className="h-[17px] w-[17px] shrink-0"
+                                                                             aria-hidden="true"
+                                                                      />
+                                                                      ریست کردن فیلد ها
+                                                               </div>
+                                                        </div>
+                                                 </Modal>
                                                  {/* FAQ */}
                                                  <Link
                                                         to="/faq"

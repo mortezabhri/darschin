@@ -13,7 +13,7 @@ export const notifyError = (msg) => toast.error(msg, {
      theme: Get("them") ?? 'light',
      transition: Flip,
      pauseOnFocusLoss: false,
-     className: "!font-iranisans border border-neutral-300"
+     className: "toastify-custom"
 });
 export const notifySuccess = (msg) => toast.success(msg, {
      position: "top-right",
@@ -26,7 +26,7 @@ export const notifySuccess = (msg) => toast.success(msg, {
      theme: Get("them") ?? 'light',
      transition: Flip,
      pauseOnFocusLoss: false,
-     className: "!font-iranisans border border-neutral-300"
+     className: "toastify-custom"
 });
 export const notifyWarn = (msg) => toast.loading(msg, {
      position: "top-right",
@@ -39,5 +39,5 @@ export const notifyWarn = (msg) => toast.loading(msg, {
      theme: Get("them") ?? 'light',
      transition: Flip,
      pauseOnFocusLoss: false,
-     className: "!font-iranisans border border-neutral-300"
+     className: "toastify-custom"
 });

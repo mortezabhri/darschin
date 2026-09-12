@@ -74,7 +74,10 @@ function App() {
               <PlanProvider>
                      <SettingsProvider>
                             <section className="min-w-xs max-w-lg mx-auto select-none bg-quaternary dark:bg-neutral-500 transition-all min-h-dvh relative overflow-x-hidden" id="main">
-                                   <ToastContainer rtl style={{ zIndex: 9999999 }} />
+                                   <ToastContainer
+                                          rtl
+                                          style={{ zIndex: 9999999 }}
+                                   />
                                    <Sidebar />
                                    <div className="py-6"></div>
                                    <Routes>
