@@ -47,6 +47,7 @@ export default function Settings() {
        const [openSetting, setOpenSetting] = useState(false);
        const [opendownloader, setOpenDownloader] = useState(false);
        const [openCreatePlan, setOpenCreatePlan] = useState(false);
+       const [openCreatePlanByAi, setOpenCreatePlanByAi] = useState(false);
        const [textarea, setTextarea] = useState(null);
        const [vocationWeek, setVocationWeek] = useState(Get("vocation") ?? false)
        const [learn, setLearn] = useState({
@@ -56,7 +57,7 @@ export default function Settings() {
        const [refreshForNotif, setRefreshForNotif] = useState(false)
 
        useEffect(() => {
-              if (learn.index > 8) setLearn({ index: 0, text: "" })
+              if (learn.index > 9) setLearn({ index: 0, text: "" })
        }, [learn.index])
 
        const filePicker = useRef();
@@ -98,13 +99,14 @@ export default function Settings() {
        const refreshDesc = (index) => {
               switch (index) {
                      case 1: return "دانشجویان دانشگاه ملی مهارت میتوانند صرفا با کپی و پیست برنامه خود از سایت بوستان در این بخش ، برنامه خود را بصورت خودکار بسازند"
-                     case 2: return "امکان شخصی‌سازی تایم روز مطابق انتخاب واحد شما (بصورت پیشفرض ساعت شروع کلاس ها از 8 تا 20 تنظیم شده است )"
-                     case 3: return "پشتیبانی از حالت روشن و تاریک، سازگار با شرایط نوری مختلف"
-                     case 4: return "دریافت برنامه درسی در قالب های مختلف (عکس یا پی دی اف) همچنین میتونید با یکبار انلاین شدن بصورت افلاین از درس چین استفاده کنید (جهت دسترسی بهتر میتونید در قالب اپلیکیشن روی موبایل هم نصب کنید)"
-                     case 5: return "میتونید از درس هایی که اضافه کردید خروجی بگیرید تا روی یک دستگاه دیگه هم درس ها تون رو داشته باشید"
-                     case 6: return "با وارد کردن خروجی ای که از درس چین گرفتید به راحتی درس هاتون رو اضافه کنید"
-                     case 7: return "کاربرانی که در روز های پنج شنبه و جمعه کلاسی ندارند میتونند این روز ها رو از برنامه شون حذف کنند "
-                     case 8: return ""
+                     case 2: return "دانشجویان دانشگاه های مختلف در سطح کشور برای افزودن خودکار درس های خود به درس چین میتوانند از این بخش استفاده کنند."
+                     case 3: return "امکان شخصی‌سازی تایم روز مطابق انتخاب واحد شما (بصورت پیشفرض ساعت شروع کلاس ها از 8 تا 20 تنظیم شده است )"
+                     case 4: return "پشتیبانی از حالت روشن و تاریک، سازگار با شرایط نوری مختلف"
+                     case 5: return "دریافت برنامه درسی در قالب های مختلف (عکس یا پی دی اف) همچنین میتونید با یکبار انلاین شدن بصورت افلاین از درس چین استفاده کنید (جهت دسترسی بهتر میتونید در قالب اپلیکیشن روی موبایل هم نصب کنید)"
+                     case 6: return "میتونید از درس هایی که اضافه کردید خروجی بگیرید تا روی یک دستگاه دیگه هم درس ها تون رو داشته باشید"
+                     case 7: return "با وارد کردن خروجی ای که از درس چین گرفتید به راحتی درس هاتون رو اضافه کنید"
+                     case 8: return "کاربرانی که در روز های پنج شنبه و جمعه کلاسی ندارند میتونند این روز ها رو از برنامه شون حذف کنند "
+                     case 9: return ""
                      default: return ""
               }
        }
@@ -205,10 +207,10 @@ export default function Settings() {
                      <div style={{ display: learn.index ? "block" : "none" }} className="absolute top-0 left-0 w-full h-full backdrop-blur-sm z-99">
                             {/* description */}
                             <div
-                                   className={`${learn.index === 8 && "top-1/2 -translate-y-1/2"} relative text-sm text-center pt-6 pb-8 px-4 bg-neutral-100 rounded-xl m-8 font-iranisans z-999`} dir="rtl"
+                                   className={`${learn.index === 9 && "top-1/2 -translate-y-1/2"} relative text-sm text-center pt-6 pb-8 px-4 bg-neutral-100 rounded-xl m-8 font-iranisans z-999`} dir="rtl"
                             >
                                    {
-                                          learn.index === 8 && (
+                                          learn.index === 9 && (
                                                  <>
                                                         <h3 className="text-xl mb-6">نکات تکمیلی مهم</h3>
                                                         <p>
@@ -255,7 +257,7 @@ export default function Settings() {
                                           onClick={() => setOpenCreatePlan(prev => !prev)}
                                    >
                                           <p className="text-xl mb-1">افزودن خودکار درس ها</p>
-                                          <p className="text-base">(مخصوص دانشجویان دانشگاه ملی مهارت)</p>
+                                          <p className="text-sm">(مخصوص دانشجویان دانشگاه ملی مهارت)</p>
                                    </button>
                                    <Modal isOpen={openCreatePlan} onClose={() => setOpenCreatePlan(prev => !prev)} textTitle={"افزودن خودکار درس ها"} state={2}>
                                           <div className="w-full font-iranisans text-center">
@@ -289,9 +291,43 @@ export default function Settings() {
                                           </div>
                                    </Modal>
                             </div>
-                            {/* change settings */}
+                            {/* create plan automatically by AI */}
                             <div
                                    style={learn.index === 2 ? {
+                                          position: "relative",
+                                          zIndex: 102
+                                   } : {}}
+                                   className="flex flex-col justify-center items-center">
+                                   <button
+                                          dir="rtl"
+                                          className="w-8/10 cursor-pointer bg-[#1eacff] shadow-[#1eacff]/30 shadow-xl p-2 rounded-lg"
+                                          onClick={() => setOpenCreatePlanByAi(prev => !prev)}
+                                   >
+                                          <p className="text-lg mb-1">افزودن خودکار درس ها به کمک AI</p>
+                                          <p className="text-sm">(مخصوص همه دانشجویان - نسخه آزمایشی)</p>
+                                   </button>
+                                   <Modal isOpen={openCreatePlanByAi} onClose={() => setOpenCreatePlanByAi(prev => !prev)} textTitle={"افزودن خودکار درس ها به کمک AI"} state={4}>
+                                          <div className="w-full font-iranisans text-center">
+                                                 <div className="mt-2 space-y-3 text-sm leading-5.5" dir="rtl">
+                                                        <p>
+                                                               ۱ - ابتدا فایل پرامپت رو از <a href="/darschin/other/Prompt.txt" download={"Prompt.txt"} className="underline text-blue-300">این لینک</a> دانلود کنید
+                                                        </p>
+                                                        <p>
+                                                               ۲ - فایل پرامپت رو به همراه فایل PDF انتخاب واحد، برای یک مدل هوش مصنوعی (نظیر Chatgpt , Claude , deepseek و ...) ارسال میکنید. <span className="text-red-400">نیازی به نوشتن متن نیست.</span>
+                                                        </p>
+                                                        <p>
+                                                               ۳ - مدل، برای شما یک فایلی با نام darschin.json تولید میکند. آن را دانلود کرده و در بخش "وارد کردن" در همین صفحه، فایل را برای درس چین ارسال میکنید. تمام درس های شما در کسری از ثانیه با تمام جزئیات به درس چین اضافه میشوند.
+                                                        </p>
+                                                        <p className="text-green-400">
+                                                               در صورت وجود مشکل یا باگ به آیدی mbhdev در تلگرام پیام بدید.
+                                                        </p>
+                                                 </div>
+                                          </div>
+                                   </Modal>
+                            </div>
+                            {/* change settings */}
+                            <div
+                                   style={learn.index === 3 ? {
                                           position: "relative",
                                           zIndex: 102
                                    } : {}}
@@ -317,7 +353,7 @@ export default function Settings() {
                             </div>
                             {/* change them mode */}
                             <div
-                                   style={learn.index === 3 ? {
+                                   style={learn.index === 4 ? {
                                           position: "relative",
                                           zIndex: 102
                                    } : {}}
@@ -362,7 +398,7 @@ export default function Settings() {
                             </div>
                             {/* download pdf */}
                             <div
-                                   style={learn.index === 4 ? {
+                                   style={learn.index === 5 ? {
                                           position: "relative",
                                           zIndex: 102
                                    } : {}}
@@ -428,12 +464,12 @@ export default function Settings() {
                             {/* export / import */}
                             <div className="flex justify-center items-center px-10 gap-x-2">
                                    <button
-                                          style={learn.index === 5 ? {
+                                          style={learn.index === 6 ? {
                                                  position: "relative",
                                                  zIndex: 102
                                           } : {}} onClick={() => ExportPlansHandler()} className=" w-full text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg">خروجی گرفتن</button>
                                    <button
-                                          style={learn.index === 6 ? {
+                                          style={learn.index === 7 ? {
                                                  position: "relative",
                                                  zIndex: 102
                                           } : {}} onClick={() => importPlansHandler()} className=" w-full text-lg cursor-pointer bg-neutral-200 dark:bg-neutral-400 dark:shadow-white/20 shadow-xl py-2 rounded-lg">وارد کردن</button>
@@ -441,7 +477,7 @@ export default function Settings() {
                             </div>
                             {/* enable/disable vocations */}
                             <div
-                                   style={learn.index === 7 ? {
+                                   style={learn.index === 8 ? {
                                           position: "relative",
                                           zIndex: 102
                                    } : {}}
