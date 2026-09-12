@@ -793,7 +793,7 @@ export default function ({ day }) {
                                                                                                                 style={{
                                                                                                                        transform: "rotate(270deg)"
                                                                                                                 }}
-                                                                                                                className="w-24 h-32 border absolute top-1/2 -translate-y-1/2 right-6 flex flex-col justify-end gap-4 items-center overflow-hidden cursor-pointer">
+                                                                                                                className="w-24 h-32 absolute top-1/2 -translate-y-1/2 right-6 flex flex-col justify-end gap-4 items-center overflow-hidden cursor-pointer">
                                                                                                                 {
                                                                                                                        plan.badges.map(item => {
                                                                                                                               if (thisWeek.includes(item.date) || item.date === "all") return <Badge key={Math.random() * 100} description={item.description} title={item.name} badgeID={item.id} lessonID={plan.id} />

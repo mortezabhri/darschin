@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -27,6 +27,23 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Create 404 redirect page
+        run: |
+          cat > dist/404.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <title>Redirecting...</title>
+            </head>
+            <body>
+              <script>
+                     window.location.replace("/darschin");
+              </script>
+            </body>
+          </html>
+          EOF
 
       - name: Deploy to gh-pages (overwrite)
         uses: peaceiris/actions-gh-pages@v4
